@@ -13,7 +13,7 @@ class Node
   def insert(new_score, new_name)
     #recursively traverse the existing node tree for an open spot
     #refactor to a single method that takes @left or @right as arg.
-    if new_score <= @score #use single line if. traverse(node, depth) if new_score <= @score
+    if new_score <= @score
 
       if @left.nil?
         @left = Node.new(new_score, new_name, @depth + 1)
@@ -52,22 +52,12 @@ class Node
 
   end
 
-  def include?(query_score)
+
+
+  def node_depth_of(query_score)
+
     node = find_node(query_score)
-    if node.nil?
-      return false
-    else
-      return true
-    end 
-  end
-
-
-  def node_depth_of
-    #this is basically include?, except I want to report the depth of the
-    #node that satisfies the return condition.
-
-
-
+    return node.depth
   end
 end
 

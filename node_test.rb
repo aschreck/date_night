@@ -46,4 +46,7 @@ class NodeTest < Minitest::Test
     assert_nil third_node.left
   end
 
+  def test_node_depth_of
+
+
 end

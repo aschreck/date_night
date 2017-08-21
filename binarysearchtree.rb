@@ -19,15 +19,16 @@ class BinarySearchTree
     end
   end
 
-  def include?(query_score, node = @root)
-    #check existing tree for nodes of a specifc value
-    #run on root node and recursively test
-    #pass in @root as a default—then recursive calls are generalized.
+  def include?(query_score)
+
+    return false if @root.nil?
+
+    node = @root.find_node(query_score)
+
     if node.nil?
       return false
     else
-      #delegate to the node method.
-      @root.include?(query_score)
+      return true
     end
   end
 
