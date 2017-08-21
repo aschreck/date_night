@@ -31,9 +31,11 @@ class BinarySearchTree
     end
   end
 
+
   def depth_of(query_score)
     #return the depth of the node in question by score.
-    return nil if @root.nil? 
+    return nil if @root.nil?
+    @root.node_depth_of(query_score)
 
 
 

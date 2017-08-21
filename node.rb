@@ -23,7 +23,6 @@ class Node
       end
 
 
-
     elsif new_score > @score
 
       if @right.nil?
@@ -37,30 +36,35 @@ class Node
 
   end
 
-  def include?(query_score)
-
-    if @score < query_score
-      #run recursively on the .right
-      if @right.nil?  #should make into own method,
-        return false
-      else
-        @right.include?(query_score)
-      end
-
-    elsif @score > query_score #should combine @left and @right into one method.
-      #run recursively on left branch
-      if @left.nil?
-        return false
-      else
-        @left.include?(query_score)
-      end
-
-    elsif @score == query_score
-
-      return true
-
+  def find_node(query_score)
+    #this method will find a node and return it.
+    if @score == query_score
+      return self
     end
+
+    @score < query_score ? target_node = @right : target_node = @left
+
+    if target_node.nil?
+      return nil
+    else
+      target_node.find_node(query_score)
+    end
+
   end
+
+  def include?(query_score)
+    node = find_node(query_score)
+    if node.nil?
+      return false
+    else
+      return true
+    end 
+  end
+
+
+  def node_depth_of
+    #this is basically include?, except I want to report the depth of the
+    #node that satisfies the return condition.
 
 
 
