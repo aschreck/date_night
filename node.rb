@@ -52,13 +52,6 @@ class Node
 
   end
 
-
-
-  def node_depth_of(query_score)
-
-    node = find_node(query_score)
-    return node.depth
-  end
 end
 
 #look into node names

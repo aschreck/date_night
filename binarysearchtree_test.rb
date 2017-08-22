@@ -60,6 +60,17 @@ class BinarySearchTreeTest < Minitest::Test
     refute tree.include?(45)
   end
 
+  def test_depth_of
+    tree = BinarySearchTree.new
+    tree.insert(61, "Bill & Ted's Excellent Adventure")
+    tree.insert(16, "Johnny English")
+    tree.insert(92, "Sharknado 3")
+    tree.insert(50, "Hannibal Buress: Animal Furnace")
+
+    assert tree.include?(16)
+    refute tree.include?(72)
+  end
+
 end
 
 
