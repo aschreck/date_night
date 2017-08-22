@@ -7,10 +7,9 @@ class BinarySearchTree
     @root = nil
   end
 
-
   def insert (score,name)
     #Search Tree looks for leading node
-    if @root == nil
+    if @root.nil?
       @root = Node.new(score,name, 0)
       return 0 #root depth is always zero
     else
@@ -38,10 +37,49 @@ class BinarySearchTree
     return nil if @root.nil?
     node = @root.find_node(query_score)
     return node.depth
+  end
 
+  def max
+    node = @root.node_extrema(:right)
+    return node.hash_converter
+  end
+
+  def min
+    node = @root.node_extrema(:left)
+    return node.hash_converter
+  end
+
+  def sort(node = @root)
+    #iterate through nodes and put them into an array
+    sorted_list =[]
+    return nil if node.nil?
+    sorted_list.push(sort(node.left))
+    sorted_list.push(node.hash_converter)
+    sorted_list.push(sort(node.right))
+
+    return sorted_list.flatten.compact
+  end
+
+  def load(file_name)
+    file = File.open(file_name, 'r')
+    i = 0
+    text = file.each do |line|
+      trimmed_line =line.tr(',', '')
+      line_array = trimmed_line.split(' ')
+      #line array[0] is the value and [1] is the name.
+      self.insert(line_array[0], line_array[1])
+      i += 1
+    end
+
+    return i
+
+  end
+
+  def health(depth)
+    if depth =
   end
 end
 
 
-#smart node and dumb node.
+
 #guard clause: stop recuring if reach the end of whatever.

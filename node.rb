@@ -23,6 +23,7 @@ class Node
       end
 
 
+
     elsif new_score > @score
 
       if @right.nil?
@@ -52,6 +53,32 @@ class Node
 
   end
 
+  def find_depth(query_depth)
+    if @depth == query_depth
+      return self
+    elsif self.nil?
+    end
+
+    @left.find_depth(query_depth)
+    @right.find_depth(query_depth)
+  end
+
+  def node_extrema(direction) #takes @left or @right
+    #no nil case since called from node.
+    node = @right if direction == :right
+    node = @left if direction == :left
+
+    if node.nil?
+      return self
+    else
+      node.node_extrema(direction)
+    end
+
+  end
+
+  def hash_converter
+   {self.name => self.score}
+  end
 end
 
 #look into node names
