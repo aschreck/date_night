@@ -7,6 +7,15 @@ require 'pry'
 
 class BinarySearchTreeTest < Minitest::Test
 
+  def prefilled_tree
+    tree = BinarySearchTree.new
+    tree.insert(61, "Bill & Ted's Excellent Adventure")
+    tree.insert(16, "Johnny English")
+    tree.insert(92, "Sharknado 3")
+    tree.insert(50, "Hannibal Buress: Animal Furnace")
+    return tree
+  end
+
   def test_it_exists
     tree = BinarySearchTree.new
     assert_instance_of BinarySearchTree, tree
@@ -41,7 +50,7 @@ class BinarySearchTreeTest < Minitest::Test
   end
 
 
-  def test_multinode_include?
+  def test_multiple_includes
     tree = BinarySearchTree.new
     tree.insert(98, "Animals United")
     tree.insert(58, "Armageddon")
@@ -60,7 +69,7 @@ class BinarySearchTreeTest < Minitest::Test
     refute tree.include?(45)
   end
 
-  def test_depth_of
+  def test_depth_of_reports_depth
     tree = BinarySearchTree.new
     tree.insert(61, "Bill & Ted's Excellent Adventure")
     tree.insert(16, "Johnny English")
@@ -71,26 +80,26 @@ class BinarySearchTreeTest < Minitest::Test
     assert_equal 2, tree.depth_of(50)
   end
 
-  def test_min_max
-    tree = BinarySearchTree.new
-    tree.insert(61, "Bill & Ted's Excellent Adventure")
-    tree.insert(16, "Johnny English")
-    tree.insert(92, "Sharknado 3")
-    tree.insert(50, "Hannibal Buress: Animal Furnace")
+  def test_min
+    tree = prefilled_tree
 
-    assert_equal ({"Sharknado 3" => 92}), tree.max
+    assert_equal ({"Johnny English" => 16}), tree.min
+  end
+
+  def test_max
+    tree = prefilled_tree
+
     assert_equal ({"Johnny English" => 16}), tree.min
   end
 
   def test_sort
-    tree = BinarySearchTree.new
-    tree.insert(61, "Bill & Ted's Excellent Adventure")
-    tree.insert(16, "Johnny English")
-    tree.insert(92, "Sharknado 3")
-    tree.insert(50, "Hannibal Buress: Animal Furnace")
-
-    assert_equal [{"Johnny English"=>16}, {"Hannibal Buress: Animal Furnace"=>50}, {"Bill & Ted's Excellent Adventure"=>61}, {"Sharknado 3"=>92}] , tree.sort
-
+    tree = prefilled_tree
+    assert_equal [
+      {"Johnny English"=>16},
+      {"Hannibal Buress: Animal Furnace"=>50},
+      {"Bill & Ted's Excellent Adventure"=>61},
+      {"Sharknado 3"=>92}
+    ] , tree.sort
   end
 
   def test_load
