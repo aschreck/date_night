@@ -54,21 +54,27 @@ class Node
   end
 
   def find_nodes_at_depth(query_depth)
+    #this is not returning the correct number of children
     nodes_at_depth = []
     if @depth == query_depth
-      children = self.child_count()
+      children = self.child_count
       nodes_at_depth.push([self.score, children])
-    end
+    else
 
-    unless @left.nil?
-      @left.find_nodes_at_depth(query_depth)
-    end
+      unless @left.nil?
+        nodes_at_depth += @left.find_nodes_at_depth(query_depth)
+      end
 
-    unless @right.nil?
-      @right.find_nodes_at_depth(query_depth)
+      unless @right.nil?
+        nodes_at_depth += @right.find_nodes_at_depth(query_depth)
+      end
+
     end
 
     return nodes_at_depth
+  end
+
+  def node_to_array
   end
 
   def child_count(node = self)
@@ -77,13 +83,11 @@ class Node
     #if there is a child, add +1 to a counter.
     #this is running recursively forever.
     unless node.left.nil?
-      child_counter +=1
-      child_count(node.left)
+      child_counter += child_count(node.left)
     end
 
     unless node.right.nil?
-      child_counter +=1
-      child_count(node.right)
+      child_counter += child_count(node.right)
     end
 
     return child_counter

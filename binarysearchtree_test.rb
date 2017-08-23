@@ -26,7 +26,7 @@ class BinarySearchTreeTest < Minitest::Test
     assert_nil tree.root
   end
 
-  def test_tree_insert_single
+  def test_tree_insert_return_value
     tree = BinarySearchTree.new
 
     assert_nil tree.root
@@ -36,21 +36,8 @@ class BinarySearchTreeTest < Minitest::Test
 
   end
 
-  def test_tree_include?
-    tree = BinarySearchTree.new
-    tree.insert(98, "Animals United")
-    tree.insert(36, "Bill & Ted's Bogus Journey")
-    tree.insert(93, "Bill & Ted's Excellent Adventure")
 
-    assert tree.include?(36)
-    assert tree.include?(98)
-    assert tree.include?(93)
-    refute tree.include?(45)
-
-  end
-
-
-  def test_multiple_includes
+  def test_includes
     tree = BinarySearchTree.new
     tree.insert(98, "Animals United")
     tree.insert(58, "Armageddon")
