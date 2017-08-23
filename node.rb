@@ -53,14 +53,40 @@ class Node
 
   end
 
-  def find_depth(query_depth)
+  def find_nodes_at_depth(query_depth)
+    nodes_at_depth = []
     if @depth == query_depth
-      return self
-    elsif self.nil?
+      children = self.child_count
+      nodes_at_depth.push([self.score, children])
     end
 
-    @left.find_depth(query_depth)
-    @right.find_depth(query_depth)
+    unless @left.nil?
+      @left.find_nodes_at_depth(query_depth)
+    end
+
+    unless @right.nil?
+      @right.find_nodes_at_depth(query_depth)
+    end
+
+    return nodes_at_depth
+  end
+
+  def child_count(node = self)
+    child_counter = 1 #default at 1 for current node
+    #for a given node, check its @left and @right for children
+    #if there is a child, add +1 to a counter.
+    unless node.left.nil?
+      child_counter +=1
+      childcount(@left)
+    end
+
+    unless node.right.nil?
+      child_counter +=1
+      childcount(@right)
+    end
+
+    return child_counter
+
   end
 
   def node_extrema(direction) #takes @left or @right

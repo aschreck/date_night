@@ -1,5 +1,5 @@
 require './node.rb'
-require 'pry'
+
 class BinarySearchTree
   attr_accessor :root, :score, :name
 
@@ -75,9 +75,18 @@ class BinarySearchTree
 
   end
 
-  def health(depth)
-    if depth =
+  def health(query_depth)
+    count = self.sort.length
+    #nodes_at_depth should return an array of all the nodes with the first two fields.
+    nodes_at_depth = @root.find_nodes_at_depth(query_depth)
+    #take the existing array and add third element, children/count
+    health_arrays = nodes_at_depth.map do |node_array|
+      parentage_percent = 100 * (node_array[1]/count)
+      node_array.push(parentage_percent)
+    end
+    return health_arrays
   end
+
 end
 
 

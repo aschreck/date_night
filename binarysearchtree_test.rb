@@ -90,12 +90,30 @@ class BinarySearchTreeTest < Minitest::Test
     tree.insert(50, "Hannibal Buress: Animal Furnace")
 
     assert_equal [{"Johnny English"=>16}, {"Hannibal Buress: Animal Furnace"=>50}, {"Bill & Ted's Excellent Adventure"=>61}, {"Sharknado 3"=>92}] , tree.sort
+
   end
 
   def test_load
     tree = BinarySearchTree.new
     assert_equal 99, tree.load('movies.txt')
   end
+
+  def test_health
+    tree = BinarySearchTree.new
+    tree.insert(98, "Animals United")
+    tree.insert(58, "Armageddon")
+    tree.insert(36, "Bill & Ted's Bogus Journey")
+    tree.insert(93, "Bill & Ted's Excellent Adventure")
+    tree.insert(86, "Charlie's Angels")
+    tree.insert(38, "Charlie's Country")
+    tree.insert(69, "Collateral Damage")
+
+    assert_equal [[98, 7, 100]], tree.health(0)
+    assert_equal [[58, 6, 85]], tree.health(1)
+    assert_equal [[36, 2, 28], [93, 3, 42]], tree.health(2)
+  end
+
+
 end
 
 
