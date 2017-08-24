@@ -1,8 +1,8 @@
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require './binarysearchtree.rb'
-require './node.rb'
+require_relative './binarysearchtree'
+require_relative './node'
 require 'pry'
 
 class BinarySearchTreeTest < Minitest::Test
@@ -26,7 +26,7 @@ class BinarySearchTreeTest < Minitest::Test
     assert_nil tree.root
   end
 
-  def test_tree_insert_return_value
+  def test_tree_insert_returns_tree_depth
     tree = BinarySearchTree.new
 
     assert_nil tree.root
@@ -67,17 +67,18 @@ class BinarySearchTreeTest < Minitest::Test
     assert_equal 2, tree.depth_of(50)
   end
 
+  def test_max
+    tree = prefilled_tree
+
+    assert_equal ({"Johnny English" => 16}), tree.min
+  end
+
   def test_min
     tree = prefilled_tree
 
     assert_equal ({"Johnny English" => 16}), tree.min
   end
 
-  def test_max
-    tree = prefilled_tree
-
-    assert_equal ({"Johnny English" => 16}), tree.min
-  end
 
   def test_sort
     tree = prefilled_tree
