@@ -4,6 +4,8 @@ require 'minitest/pride'
 require '../lib/node.rb'
 
 class NodeTest < Minitest::Test
+#because most of  node methods run off of the BinarySearchTree,
+#the majority of the tests are run from the BinarySearchTree test file
 
   def test_node_exists
 

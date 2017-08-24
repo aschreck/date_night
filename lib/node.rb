@@ -12,7 +12,6 @@ class Node
 
   def insert(new_score, new_name)
     #recursively traverse the existing node tree for an open spot
-    #refactor to a single method that takes @left or @right as arg.
     if new_score <= @score
 
       if @left.nil?
@@ -21,8 +20,6 @@ class Node
       else
         return @left.insert(new_score, new_name)
       end
-
-
 
     elsif new_score > @score
 
@@ -33,7 +30,6 @@ class Node
         return @right.insert(new_score, new_name)
       end
     end
-
 
   end
 
@@ -54,7 +50,8 @@ class Node
   end
 
   def find_nodes_at_depth(query_depth)
-    #this is not returning the correct number of children
+    #this method finds all the nodes at a given depth and
+    #returns an array of score and # of children to health.
     nodes_at_depth = []
     if @depth == query_depth
       children = self.child_count
@@ -74,14 +71,11 @@ class Node
     return nodes_at_depth
   end
 
-  def node_to_array
-  end
 
   def child_count(node = self)
     child_counter = 1 #default at 1 for current node
     #for a given node, check its @left and @right for children
     #if there is a child, add +1 to a counter.
-    #this is running recursively forever.
     unless node.left.nil?
       child_counter += child_count(node.left)
     end
@@ -95,7 +89,6 @@ class Node
   end
 
   def node_extrema(direction) #takes @left or @right
-    #no nil case since called from node.
     node = @right if direction == :right
     node = @left if direction == :left
 

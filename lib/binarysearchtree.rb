@@ -3,9 +3,11 @@ require_relative '../lib/node.rb'
 class BinarySearchTree
   attr_accessor :root, :score, :name
 
+
   def initialize
     @root = nil
   end
+
 
   def insert (score,name)
     #Search Tree looks for leading node
@@ -18,6 +20,7 @@ class BinarySearchTree
     end
   end
 
+
   def include?(query_score)
 
     return false if @root.nil?
@@ -29,6 +32,7 @@ class BinarySearchTree
     else
       return true
     end
+
   end
 
 
@@ -39,15 +43,18 @@ class BinarySearchTree
     return node.depth
   end
 
+
   def max
     node = @root.node_extrema(:right)
     return node.hash_converter
   end
 
+
   def min
     node = @root.node_extrema(:left)
     return node.hash_converter
   end
+
 
   def sort(node = @root)
     #iterate through nodes and put them into an array
@@ -60,9 +67,11 @@ class BinarySearchTree
     return sorted_list.flatten.compact
   end
 
+
   def load(file_name)
     file = File.open(file_name, 'r')
     i = 0
+
     text = file.each do |line|
       trimmed_line =line.tr(',', '')
       line_array = trimmed_line.split(' ')
@@ -75,11 +84,11 @@ class BinarySearchTree
 
   end
 
+
   def health(query_depth)
     count = @root.child_count
-    #nodes_at_depth should return an array of all the nodes with the first two fields.
+    #nodes_at_depth returns an array of all the nodes with the first two fields.
     nodes_at_depth = @root.find_nodes_at_depth(query_depth)
-    #here children is reporting 2
     #take the existing array and add third element, children/count
 
     health_arrays = nodes_at_depth.map do |node_array|
@@ -87,11 +96,10 @@ class BinarySearchTree
       parentage_percent = parentage_percent.floor
       node_array.push(parentage_percent)
     end
+
     return health_arrays
+
   end
 
+
 end
-
-
-
-#guard clause: stop recuring if reach the end of whatever.
